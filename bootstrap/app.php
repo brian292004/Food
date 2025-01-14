@@ -14,8 +14,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'checkRole' => CheckRole::class,
-            // 'auth' => \App\Http\Middleware\Authenticate::class, // Đăng ký alias 'checkRole'
-            // ... các middleware khác
         ]);
         $middleware->group('web', [
             \Illuminate\Cookie\Middleware\EncryptCookies::class,

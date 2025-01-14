@@ -14,11 +14,16 @@ Route::get('/', function () {
     Route::post('admin/register',[AdminController::class,'registeruser']);
 
 
-Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:admin'])->group(function () {
+Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->group(function () {
     Route::get('admin',[AdminController::class,'index'])->name('dashboard');
     Route::get('dashboard',[AdminController::class,'adminDashboard'])->name('adminDashboard');
     Route::get('addUser',[AdminController::class,'addUser'])->name('addUser');
+    Route::post('AddUser',[AdminController::class,'store'])->name('store.addUser');
     Route::get('showUser',[AdminController::class,'showUser'])->name('showUser');
+    Route::get('infoUser={id}',[AdminController::class,'infoUser'])->name('infoUser');
+    Route::get('editUser={id}',[AdminController::class,'editUser'])->name('editUser');
+    Route::post('updateUser={id}',[AdminController::class,'updateUser'])->name('updateUser');
+    Route::get('deleteUser={id}',[AdminController::class,'deleteUser'])->name('deleteUser');
 });
 
 Route::get('foodDashboard',[AdminController::class,'food'])->name('user.dashboard');

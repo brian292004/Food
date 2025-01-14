@@ -25,11 +25,11 @@ class CheckRole
         $user = Auth::user(); // Lấy thông tin người dùng một lần
 
         switch ($user->role) {
-            case 'admin':
+            case 'Admin':
                 return $next($request);
-            case 'user':
+            case 'User':
                 return redirect()->route('user.dashboard');
-            case 'shop':
+            case 'Shop':
                 return redirect()->route('dashboard.index');
             default:
                 // Xử lý trường hợp role không xác định
