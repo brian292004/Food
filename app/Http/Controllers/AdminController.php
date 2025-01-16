@@ -88,6 +88,11 @@ class AdminController extends Controller
         return redirect()->route('admin.showUser')->with('success', 'Đã thêm người dùng thành công.');
     }
 
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
     public function showUser(){
         $users = User::paginate(5);
         return view('AdminPage.User',compact(
