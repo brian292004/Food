@@ -21,7 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'provider',
+        'provider_id',
     ];
 
     /**
@@ -45,5 +47,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function redirectTo()
+    {
+        if ($this->role === 'Admin') {
+            return '/admin';
+        }
+
+        return '/foodDashboard';
     }
 }
