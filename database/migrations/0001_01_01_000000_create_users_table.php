@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('role');
             $table->string('provider')->nullable(); // Google, Facebook, etc.
             $table->string('provider_id')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
