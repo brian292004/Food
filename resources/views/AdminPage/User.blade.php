@@ -22,7 +22,6 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr class="text-center">
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -33,9 +32,6 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr class="text-center">
-                                <td>
-                                    {{$user->id}}
-                                </td>
                                 <td>
                                     {{$user->name}}
                                 </td>

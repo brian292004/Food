@@ -33,11 +33,11 @@
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Components</span>
             </a>
-            <div id="collapseTwo" class="collapse {{ request()->routeIs('admin.showUser', 'admin.addUser') ? 'show' : '' }}" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
+            <div id="collapseTwo" class="collapse {{ request()->routeIs('admin.showUser', 'admin.Shop') ? 'show' : '' }}" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
+                    <h6 class="collapse-header">Tác vụ:</h6>
                     <a class="collapse-item {{ request()->routeIs('admin.showUser') ? 'active' : '' }}" href="{{ route('admin.showUser') }}">User</a>
-                    <a class="collapse-item {{ request()->routeIs('admin.addUser') ? 'active' : '' }}" href="{{ route('admin.addUser') }}">Add User</a>
+                    <a class="collapse-item {{ request()->routeIs('admin.Shop') ? 'active' : '' }}" href="{{ route('admin.Shop') }}">Shop</a>
                 </div>
             </div>
         </li>

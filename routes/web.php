@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ShopController;
 use App\Http\Middleware\CheckRole;
 
 
@@ -24,6 +25,7 @@ Route::get('auth/google/callback', [AuthenticationController::class, 'handleGoog
 
 
 Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->group(function () {
+    // Admin page routes
     Route::get('admin', [AdminController::class, 'index'])->name('dashboard');
     Route::get('dashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');
     Route::get('addUser', [AdminController::class, 'addUser'])->name('addUser');
@@ -35,6 +37,9 @@ Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->gro
     Route::get('deleteUser={id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
     Route::get('searchUser', [AdminController::class, 'searchUsers'])->name('searchUser');
     Route::post('lock-account/{id}', [AdminController::class, 'lockAccount'])->name('admin.lockAccount');
+
+    // Admin Shop page routes
+    Route::get('adminShop', [ShopController::class, 'adminShop'])->name('Shop');
 });
 
 Route::get('foodDashboard', [AdminController::class, 'food'])->name('user.dashboard');

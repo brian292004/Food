@@ -15,13 +15,6 @@ class AdminController extends Controller
         return view('AdminPage.index');
     }
 
-    // public function layout(){
-    //     $users = User::all();
-    //     return view('layout',compact(
-    //         'users'
-    //     ));
-    // }
-
     public function food(){
         return view('UserPage.food');
     }
@@ -76,24 +69,28 @@ class AdminController extends Controller
     }
 
     public function updateUser(Request $req, $id) {
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+        ]);
+    
         $users = User::find($id);
+    
+        if (!$users) {
+            return redirect()->route('admin.showUser')->with('error', 'Người dùng không tồn tại');
+        }
+    
         $users->update([
             'name' => $req->input('name'),
             'email' => $req->input('email'),
         ]);
     
-        $req->validate([
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
-        ]);
-    
         if ($req->hasFile('avatar')) {
             $avatar = $req->file('avatar');
             $avatarName = time().'.'.$avatar->getClientOriginalExtension();
-            $path = $avatar->storeAs('avatars', $avatarName, 'public'); // Lưu vào storage/app/public/avatars
+            $path = $avatar->storeAs('avatars', $avatarName, 'public');
             $users->update(['avatar' => $avatarName]);
-        } else {
-            // Nếu không có avatar mới được tải lên, giữ nguyên avatar hiện tại hoặc đặt avatar mặc định nếu chưa có
-            $users->update(['avatar' => 'storage/avatars/M18-30.svg']);
         }
     
         return redirect()->route('admin.showUser')->with('success', 'Đã cập nhật người dùng thành công');
@@ -116,36 +113,33 @@ class AdminController extends Controller
         ))->with('message', 'Results found.');
     }
 
-    public function lockAccount(Request $request, $id)
-{
-    $user = User::find($id);
+    public function lockAccount(Request $request, $id){
+        $user = User::find($id);
+        if ($user) {
+            if ($user->status == 'Unlock') {
+                $status = [
+                    'user_id' => $id,
+                    'locked_by' => $request->input('locked_by'),
+                    'reason' => $request->input('reason'),
+                    'lock_start_time' => $request->input('lock_start_time'),
+                    'is_locked' => true
+                ];
+                // Lưu trữ thông tin khóa tài khoản vào tệp JSON trong thư mục storage/public/status
+                $filename = storage_path('app/public/status/lockAccount.json');
+                $existingData = file_exists($filename) ? json_decode(file_get_contents($filename), true) : [];
+                $existingData[] = $status;
+                file_put_contents($filename, json_encode($existingData, JSON_PRETTY_PRINT));
 
-    if ($user) {
-        if ($user->status == 'Unlock') {
-            $status = [
-                'user_id' => $id,
-                'locked_by' => $request->input('locked_by'),
-                'reason' => $request->input('reason'),
-                'lock_start_time' => $request->input('lock_start_time'),
-                'is_locked' => true
-            ];
-            // Lưu trữ thông tin khóa tài khoản vào tệp JSON trong thư mục storage/public/status
-            $filename = storage_path('app/public/status/lockAccount.json');
-            $existingData = file_exists($filename) ? json_decode(file_get_contents($filename), true) : [];
-            $existingData[] = $status;
-            file_put_contents($filename, json_encode($existingData, JSON_PRETTY_PRINT));
-
-            $user->status = 'Lock';
-            $user->save();
-            return redirect()->route('admin.showUser')->with('success', 'Đã thay đổi trạng thái tài khoản thành công');
-        } else {
-            $user->status = 'Unlock';
-            $user->save();
-            return redirect()->route('admin.showUser')->with('success', 'Đã thay đổi trạng thái tài khoản thành công');
+                $user->status = 'Lock';
+                $user->save();
+                return redirect()->route('admin.showUser')->with('success', 'Đã thay đổi trạng thái tài khoản thành công');
+            } else {
+                $user->status = 'Unlock';
+                $user->save();
+                return redirect()->route('admin.showUser')->with('success', 'Đã thay đổi trạng thái tài khoản thành công');
+            }
         }
+        return redirect()->route('admin.showUser')->with('error', 'Không thể thay đổi trạng thái tài khoản');
     }
-
-    return redirect()->route('admin.showUser')->with('error', 'Không thể thay đổi trạng thái tài khoản');
-}
     
 }

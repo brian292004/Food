@@ -17,7 +17,13 @@
                     </div>
                     <div class="form-group">
                         <label for="reason">Lý do khóa</label>
-                        <textarea class="form-control" id="reason" name="reason" required></textarea>
+                        <br>
+                        <select class="form-select" id="reason" name="reason" required aria-label="Chọn lý do khóa">
+                            <option value="">Chọn lý do khóa</option>
+                            <option value="Vi phạm điều lệ">Vi phạm điều lệ</option>
+                            <option value="Tài khoản gặp vấn đề">Tài khoản gặp vấn đề</option>
+                            <option value="Người dùng không thanh toán tiền">Người dùng không thanh toán tiền</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="lock_start_time">Thời gian bắt đầu khóa</label>
