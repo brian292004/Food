@@ -18,7 +18,9 @@ class AdminController extends Controller
     public function food(){
         return view('UserPage.food');
     }
-
+    public function Home(){
+        return view('Home');
+    }
     public function addUser(){
         return view('AdminPage.addUser');
     }
