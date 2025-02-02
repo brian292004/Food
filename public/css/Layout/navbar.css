@@ -1,0 +1,328 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #222222;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    justify-content: center;
+    background-image: url('/img/image.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+.navbar .nav_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    min-width: 300px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.9);
+    white-space: nowrap;
+    margin-right: auto;
+}
+
+.navbar-toggler {
+    display: none;
+    padding: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    background-color: transparent;
+}
+
+.collapse {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Đẩy menu sang phải */
+    flex-grow: 1; /* Đảm bảo phần tử này chiếm không gian còn lại khi cần */
+}
+
+/* Đảm bảo tất cả các phần tử trong container nằm gọn trên 1 hàng */
+.nav_container > * {
+    flex-shrink: 0; /* Ngăn các phần tử bị co lại quá mức */
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    list-style: none;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+/* Mục navbar */
+.nav-item {
+    margin-left: 1rem;
+    margin-left: 0;
+}
+.navbar-nav::after {
+    content: "";
+    flex: 1;
+}
+
+.navbar-nav .nav-item:not(:last-child) {
+    margin-right: 10px; /* Giới hạn khoảng cách tối đa giữa các mục */
+}
+
+.nav-link {
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff; /* Màu trắng cho chữ */
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.5s ease;
+    z-index: 1;
+}
+
+.nav-link:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+/* Phong cách cho mục hiện hành */
+.nav-item.active .nav-link {
+    color: #fff;
+    background-color: #007bff;
+}
+
+/* Tùy chỉnh cho menu khi user đăng nhập (role-specific) */
+.navbar-nav .nav-item.admin .nav-link {
+    color: #dc3545; /* Đỏ cho Admin */
+}
+
+.navbar-nav .nav-item.user .nav-link {
+    color: #28a745; /* Xanh cho User */
+}
+
+.navbar-nav .nav-item.shop .nav-link {
+    color: #17a2b8; /* Xanh ngọc cho Shop */
+}
+
+/* Logout button */
+.nav-link[onclick] {
+    color: #ffc107; /* Màu vàng cho logout */
+    cursor: pointer;
+}
+
+
+/* Logo */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.1); /* Tăng kích thước logo khi hover */
+}
+
+/* Tên web */
+.nav_web-title {
+    font-family: "Bowlist", sans-serif; /* Sử dụng font Bowlist */
+    font-size: 2rem; /* Tăng kích thước chữ */
+    font-weight: bold; /* Làm đậm chữ */
+    letter-spacing: 2px; /* Thêm khoảng cách giữa các chữ */
+    transition: color 0.3s ease;
+    color: #fff;
+}
+
+.nav_web-title:hover {
+    color: #ff5733; /* Thay đổi màu chữ khi hover */
+}
+
+/* Đảm bảo navbar-toggler luôn ẩn trên màn hình lớn */
+.navbar-toggler {
+    display: none;
+    position: absolute;
+    left: 10px; /* Đặt icon bên trái */
+}
+.navbar-toggler .material-symbols-outlined {
+    color: #fff;
+    font-size: 35px;
+}
+
+
+.nav_btn {
+    margin-left: auto;
+    font-family: "Playwrite IN", serif;
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 45px;
+    color: #ffffff;
+    text-decoration: none;
+    width: 160px;
+    text-align: center;
+    cursor: pointer;
+    background: transparent;
+    backdrop-filter: blur(35px);
+    overflow: hidden;
+    border-radius: 25px;
+    border: 2px solid rgb(255, 255, 255,0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.22);
+}
+
+/* SVG for Border Animation */
+.nav_btn svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.nav_btn rect {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 0; /* No border by default */
+    stroke-dasharray: 0, 0; /* No visible border */
+    transition: all 0.35s linear;
+}
+
+/* Hover Effect */
+.nav_btn:hover {
+    background-color: transparent;
+    color: #e1332d; /* Change text color to red */
+    font-weight: 900;
+    letter-spacing: 1px;
+    transition: all 0.6s ease;
+}
+
+.nav_btn:hover rect {
+    stroke-width: 5; /* Show border on hover */
+    stroke-dasharray: 60, 243;
+    stroke-dashoffset: 83;
+    transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+
+
+
+
+
+.bar {
+    display: flex;
+    margin-left: 110px;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff; /* Màu trắng cho chữ */
+    font-family: sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    transition: color 0.5s ease;
+    z-index: 1;
+    font-family: "Playwrite IN", serif;
+}
+
+.nav-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top: 2px solid #fff; /* Màu trắng cho đường viền */
+    border-bottom: 2px solid #fff; /* Màu trắng cho đường viền */
+    transform: scaleY(2);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff; /* Màu trắng cho nền */
+    transform: scaleY(0);
+    opacity: 0;
+    transition: transform 1.2s ease, opacity 1.2s ease;
+    z-index: -1;
+}
+
+.nav-link:hover {
+    color: #000; /* Màu đen khi hover */
+}
+
+.nav-link:hover::before {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+.nav-link:hover::after {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+
+
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .nav_container {
+        width: 90%;
+        
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        display: none !important;
+        position: fixed;
+        top: 0;
+        left: -250px; /* Ẩn sidebar bên trái */
+        width: 250px;
+        height: 100%;
+        background-color: #222222;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        padding-top: 60px;
+    }
+    .navbar-collapse.show {
+        left: 0; /* Hiển thị sidebar */
+    }
+    .navbar-toggler {
+        display: block;
+        position: absolute;
+        left: 10px;
+    }
+    .nav_btn {
+        display: none;
+    }
+}
