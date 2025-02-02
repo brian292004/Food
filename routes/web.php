@@ -7,8 +7,8 @@ use App\Http\Middleware\CheckRole;
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 Route::get('login', [AuthenticationController::class, 'login'])->name('login');
 Route::post('login', [AuthenticationController::class, 'checklogin']);
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');
@@ -38,3 +38,4 @@ Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->gro
 });
 
 Route::get('foodDashboard', [AdminController::class, 'food'])->name('user.dashboard');
+Route::get('22', [AdminController::class, 'food'])->name('/');
