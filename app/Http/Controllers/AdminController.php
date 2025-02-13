@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 class AdminController extends Controller
 {
     public function adminDashboard(){
-        return view('AdminPage.index');
+        return view('AdminPage.User.index');
     }
 
     public function food(){
@@ -22,7 +22,7 @@ class AdminController extends Controller
         return view('Home');
     }
     public function addUser(){
-        return view('AdminPage.addUser');
+        return view('AdminPage.User.addUser');
     }
 
     public function store(Request $req)
@@ -51,21 +51,21 @@ class AdminController extends Controller
 
     public function showUser(){
         $users = User::paginate(5);
-        return view('AdminPage.User',compact(
+        return view('AdminPage.User.User',compact(
             'users'
         ));
     }
 
     public function infoUser($id){
         $users = User::find($id);
-        return view('AdminPage.infoUser',compact(
+        return view('AdminPage.User.infoUser',compact(
             'users'
         ));
     }
 
     public function editUser($id){
         $users = User::find($id);
-        return view('AdminPage.updateUser',compact(
+        return view('AdminPage.User.updateUser',compact(
             'users'
         ));
     }
@@ -110,7 +110,7 @@ class AdminController extends Controller
                  ->orWhere('email', 'like', "%$keyword%")
                  ->orWhere('role', 'like', "%$keyword%")
                  ->paginate(3);
-        return view('AdminPage.User',compact(
+        return view('AdminPage.User.User',compact(
             'users'
         ))->with('message', 'Results found.');
     }

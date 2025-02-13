@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Bạn có chắc muốn Unlock người này không?</p>
+                <p>Bạn có chắc muốn Unlock không?</p>
                 <form action="" method="POST" id="unlock-account-form">
                     @csrf
                     <input type="hidden" name="user_id" value="">

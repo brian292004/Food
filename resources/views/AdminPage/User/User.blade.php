@@ -1,9 +1,9 @@
 @extends('layout')
 @section('adminBody')
     <!-- DataTales Example -->
+    <h1 class="text-center mb-4 text-primary">Danh sách tài khoản người dùng</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             <form id="searchForm" action="{{ route('admin.searchUser') }}" method="get">
                 <div class="search-container">
                     <input type="text" class="form-control bg-light border-0 small" name="keyword" placeholder="Nhập từ khóa tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
@@ -76,7 +76,7 @@
                 </ul>
                 </div>
             </div>
-            @include('AdminPage.lockAccount')
+            @include('AdminPage.User.lockAccount')
         </div>
     </div>
 </div>

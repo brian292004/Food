@@ -27,5 +27,44 @@
     object-fit: cover; /* Đảm bảo ảnh không bị méo */
     margin-left: 30%;
 }
-/* avatar */
-
+/* search */
+.search-container{
+    margin-left: -15px;
+}
+/* show food action */
+.btn-action {
+    transition: transform 0.2s;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+.btn-action:hover {
+    transform: scale(1.2);
+}
+.btn-button .btn {
+    margin-bottom: 10px;
+}
+.btn-circleFood {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+.btn-circleFood i {
+    font-size: 20px;
+}
+/* show food search */
+.search-input {
+    background-color: #ffffff !important;
+    border-radius: 8px !important;
+}
+.search-input::placeholder {
+    color: #6c757d !important;
+}

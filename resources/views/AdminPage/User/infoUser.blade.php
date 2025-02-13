@@ -51,6 +51,9 @@
                         onclick="window.history.back()">
                             arrow_back_ios
                     </button>
+                    <a href="{{route('admin.editUser',['id' => $users->id])}}" class="btn btn-warning ">
+                        <i class="fas fa-edit"></i>
+                    </a>
                 </div>
         </div>
     </div>
