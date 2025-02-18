@@ -3,12 +3,13 @@
 use App\Http\Controllers\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductCatalogController;
+use App\Http\Controllers\FoodController;
 use App\Http\Middleware\CheckRole;
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('login', [AuthenticationController::class, 'login'])->name('login');
 Route::post('login', [AuthenticationController::class, 'checklogin']);
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');
@@ -23,6 +24,23 @@ Route::get('auth/google/callback', [AuthenticationController::class, 'handleGoog
 
 
 
+
+
+
+
+//user
+Route::get('product-catalog', [ProductCatalogController::class, 'index'])->name('product-catalog');
+Route::get('food-list', [FoodController::class, 'index'])->name('food-list');
+
+
+
+
+
+
+
+
+
+//admin
 Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->group(function () {
     Route::get('admin', [AdminController::class, 'index'])->name('dashboard');
     Route::get('dashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');

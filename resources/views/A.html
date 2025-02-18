@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaegar Resto</title>
+    <style>
+        .food-list-wrapper {
+            width: 100%; /* Đảm bảo container chiếm toàn bộ div cha */
+            display: flex;
+            justify-content: center;
+            background-color: #1a202c;
+            color: white;
+        }
+        
+        .food-list-container {
+            max-width: 1000px;
+            width: 100%; /* Chiếm toàn bộ width của div cha */
+            padding: 20px;
+        }
+
+        .food-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .food-list-search-box {
+            background-color: #2d3748;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            width: 250px;
+        }
+
+        .food-list-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .food-list-nav a {
+            text-decoration: none;
+            color: #c53030;
+        }
+
+        .food-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px; /* Điều chỉnh khoảng cách giữa các card */
+            margin-top: 50px;
+        }
+
+        .food-list-card {
+            background-color: #2d3748;
+            padding: 50px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 220px;
+            height: 320px;
+            position: relative;
+        }
+
+        .food-list-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            top: -30px;
+        }
+
+        .food-list-card h3 {
+            margin-top: 80px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        .food-list-card p {
+            margin: 5px 0;
+            color: #a0aec0;
+            font-size: 16px;
+        }
+
+        .food-list-text-gray {
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+    <div class="food-list-wrapper">
+        <div class="food-list-container">
+            <header class="food-list-header">
+                <div>
+                    <h1>Jaegar Resto</h1>
+                    <p class="food-list-text-gray">Tuesday, 2 Feb 2021</p>
+                </div>
+                <input type="text" class="food-list-search-box" placeholder="Search for food, coffee, etc...">
+            </header>
+            
+            <nav class="food-list-nav">
+                <a href="#">Hot Dishes</a>
+                <a href="#" class="food-list-text-gray">Cold Dishes</a>
+                <a href="#" class="food-list-text-gray">Soup</a>
+                <a href="#" class="food-list-text-gray">Grill</a>
+                <a href="#" class="food-list-text-gray">Appetizer</a>
+                <a href="#" class="food-list-text-gray">Dessert</a>
+            </nav>
+            
+            <h2>Choose Dishes</h2>
+            <div class="food-list-grid">
+                <div class="food-list-card">
+                    <img src="https://storage.googleapis.com/a1aa/image/o9Tru-qNgEeHzzgzvuDeRNxTWbeXhESSYDmfJ9FD5Uw.jpg" alt="Spicy seasoned seafood noodles">
+                    <h3>Spicy seasoned seafood noodles</h3>
+                    <p class="food-list-text-gray">$2.29</p>
+                    <p class="food-list-text-gray">20 Bowls available</p>
+                </div>
+                <div class="food-list-card">
+                    <img src="https://storage.googleapis.com/a1aa/image/A3w2Ti4cQkiaSQwO2EL2e3hCgoX0aZQaFBVvMDPJWTs.jpg" alt="Salted Pasta with mushroom sauce">
+                    <h3>Salted Pasta with mushroom sauce</h3>
+                    <p class="food-list-text-gray">$2.69</p>
+                    <p class="food-list-text-gray">11 Bowls available</p>
+                </div>
+                <div class="food-list-card">
+                    <img src="https://storage.googleapis.com/a1aa/image/gp7bnLLiV5sc-YYvje55lAys5pXRdBRP7og3EMavauo.jpg" alt="Beef dumpling in hot and sour soup">
+                    <h3>Beef dumpling in hot and sour soup</h3>
+                    <p class="food-list-text-gray">$2.99</p>
+                    <p class="food-list-text-gray">16 Bowls available</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

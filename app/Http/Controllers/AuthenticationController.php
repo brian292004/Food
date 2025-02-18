@@ -68,26 +68,32 @@ class AuthenticationController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
+            $user = User::where('email', $googleUser->getEmail())->first();
+
+            if ($user) {
+                // Người dùng đã tồn tại, đăng nhập người dùng
+                Auth::login($user);
+            } else {
+                // Người dùng chưa tồn tại, tạo người dùng mới
+                $user = User::create([
+                    'name' => $googleUser->getName(),
+                    'email' => $googleUser->getEmail(),
+                    'google_id' => $googleUser->getId(),
+                    'password' => bcrypt('password') // Bạn có thể thay đổi mật khẩu mặc định
+                ]);
+
+                Auth::login($user);
+            }
+
+            // Regenerate session
+            session()->regenerate();
+            // Chuyển hướng đến trang chủ hoặc trang mong muốn
+            return redirect()->route('admin.adminDashboard');
         } catch (\Exception $e) {
-            return redirect('/login')->withErrors(['msg' => 'Đăng nhập với Google thất bại. Vui lòng thử lại.']);
+            // Xử lý lỗi nếu có
+            return redirect()->route('login')->withErrors(['msg' => 'Đăng nhập bằng Google thất bại, vui lòng thử lại.']);
         }
-
-
-        $user = User::firstOrCreate(
-            ['email' => $googleUser->getEmail()],
-            [
-                'name' => $googleUser->getName(),
-                'provider' => 'google',
-                'provider_id' => $googleUser->getId(),
-                'password' => bcrypt(Str::random(16)), // Mật khẩu ngẫu nhiên
-                'role' => 'User',
-            ]
-        );
-
-        Auth::login($user);
-
-        return redirect($user->redirectTo());
     }
-    
+
 
 }

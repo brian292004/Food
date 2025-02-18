@@ -1,0 +1,417 @@
+/* ========== Banner (Slider) ========== */
+/* Ẩn thanh cuộn trên Chrome, Safari */
+::-webkit-scrollbar {
+    display: none;
+}
+/* Ẩn thanh cuộn trên Firefox */
+html {
+    scrollbar-width: none;
+}
+/* Ẩn thanh cuộn trên Edge */
+body {
+    -ms-overflow-style: none;
+    font-family: 'Arial', sans-serif;
+}
+
+/* ===== 🎯 BANNER CONTAINER ===== */
+#bannerContainer {
+    display: flex;
+    height: 400px;
+    width: 100%;
+    gap: 12px; /* Khoảng cách mềm mại hơn */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+body.dark #bannerContainer {
+    background-color: #2a2a2a; /* Màu nền hài hòa hơn */
+}
+
+body.light #bannerContainer {
+    background-color: #f8f9fa; /* Màu nền sáng */
+}
+
+/* ===== 📸 BANNER CAROUSEL ===== */
+#bannerCarousel {
+    position: relative;
+    flex: 0 0 70%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+#bannerCarousel .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.8s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#bannerCarousel .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#bannerCarousel .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Hiệu ứng overlay text */
+#bannerCarousel .overlay-text {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px 15px;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#bannerCarousel .slide:hover .overlay-text {
+    opacity: 1;
+}
+
+/* ===== 📌 SIDEBAR ===== */
+#bannerSidebar {
+    flex: 0 0 30%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+#bannerSidebar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#bannerSidebar .overlay-text {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px 15px;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#bannerSidebar:hover .overlay-text {
+    opacity: 1;
+}
+
+#bannerSidebar img:hover {
+    transform: scale(1.05);
+}
+
+/* ========== Khối 2: Danh mục sản phẩm nổi bật ========== */
+/* ===== 🔥 FEATURED CATEGORIES ===== */
+/* Bố cục của tiêu đề */
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 97%;
+    padding: 10px 20px;
+}
+
+/* Tiêu đề danh mục */
+.category-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    flex: 1; /* Đẩy về bên trái */
+    max-width: 380px;
+    min-width: 180px;
+}
+
+body.dark .category-title {
+    color: #ffffff;
+}
+
+body.light .category-title {
+    color: #343a40;
+}
+
+/* Ngày cập nhật */
+.update-date {
+    font-size: 15px;
+    flex: 1;
+    text-align: center; /* Đẩy ra giữa */
+    margin-right: 15%;
+}
+
+body.dark .update-date {
+    color: #e0e0e0;
+}
+
+body.light .update-date {
+    color: #343a40;
+}
+
+/* Icon bên phải */
+/* Đảm bảo icons nằm trên cùng một hàng và căn đúng vị trí */
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Căn về phía phải */
+    margin-right: 15px; /* Lùi từ right 15px */
+}
+
+/* Vùng chứa icon với nền tròn */
+/* Nền tròn cho icon */
+.icon-wrapper {
+    width: 40px; /* Kích thước hình tròn */
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    margin-right: 15px; /* Lùi từ right 15px */
+}
+
+body.dark .icon-wrapper {
+    background: rgba(200, 200, 200, 0.3); /* Màu xám mờ */
+}
+
+body.light .icon-wrapper {
+    background: rgba(52, 58, 64, 0.3); /* Màu xám mờ */
+}
+
+/* Khi hover làm nền rõ hơn */
+.icon-wrapper:hover {
+    background: rgba(200, 200, 200, 0.6);
+}
+
+/* SVG icon bên trong */
+.icon-wrapper svg {
+    width: 20px;
+    height: 20px;
+}
+
+body.dark .icon-wrapper svg {
+    fill: #F3F3F3; /* Màu icon */
+}
+
+body.light .icon-wrapper svg {
+    fill: #343a40; /* Màu icon */
+}
+
+.featured-categories {
+    padding: 30px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+body.dark .featured-categories {
+    background: #2a2a2a; /* Nền xám đậm */
+}
+
+body.light .featured-categories {
+    background: #f8f9fa; /* Nền sáng */
+}
+
+/* Gạch chân tiêu đề */
+.featured-categories h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #ff6600;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* ===== 🛒 FEATURED PRODUCTS ===== */
+#featured-products {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0 10px;
+    gap: 12px;
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+/* CARD SẢN PHẨM */
+.category-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%;
+    width: 140px;
+    height: 100%;
+    min-height: 140px;
+    flex: 0 0 140px;
+    display: flex;
+    flex-direction: column;
+}
+
+body.dark .category-card {
+    background: #333; /* Nền xám đậm */
+}
+
+body.light .category-card {
+    background: #f8f9fa; /* Nền sáng */
+}
+
+/* Hiệu ứng hover */
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(255, 102, 0, 0.3);
+}
+
+/* Ảnh chiếm 85% chiều cao */
+.category-card img {
+    width: 100%;
+    height: 75%;
+    object-fit: cover;
+}
+
+/* Thông tin sản phẩm */
+.category-card .product-info {
+    height: 18%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-card .product-name {
+    font-weight: bold;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+body.dark .category-card .product-name {
+    color: #ffffff;
+}
+
+body.light .category-card .product-name {
+    color: #343a40;
+}
+
+.category-card .product-price {
+    font-size: 13px;
+    color: #ff6600;
+}
+
+
+
+/* ========== Khối 3: 3 Cột (Feedback - Sản phẩm - Feedback) ========== */
+.highlight-section .feedback-card {
+    background: #2a2a2a; /* Nền xám đậm */
+    border-left: 5px solid #ff9800;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.highlight-section .product-card {
+    text-align: center;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.highlight-section .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-section img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+
+
+
+/* ========== Khối 3: 3 Cột (Feedback - Sản phẩm - Feedback) ========== */
+.highlight-section .feedback-card {
+    background: #f8f9fa;
+    border-left: 5px solid #ff9800;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.highlight-section .product-card {
+    text-align: center;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.highlight-section .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-section img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* ========== Khối 4: Chef ========== */
+.chefs .chef-card {
+    text-align: center;
+    padding: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.chefs .chef-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ff9800;
+}
+
+.chefs .chef-card:hover {
+    transform: scale(1.1);
+}
+
+/* ========== Khối 5: Tiêu chí hoạt động ========== */
+.operating-principles {
+    background: #f8f9fa;
+}
+
+.operating-principles .principle-card {
+    background: white;
+    text-align: center;
+    border-left: 5px solid #28a745;
+    transition: all 0.3s ease-in-out;
+}
+
+.operating-principles .principle-card:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
