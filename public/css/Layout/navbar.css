@@ -4,29 +4,23 @@
     left: 0;
     right: 0;
     height: 60px;
+    background-color: #222222;
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     justify-content: center;
+    background-image: url('/img/image.png');
     background-size: cover;
     background-position: center;
     width: 100%;
-}
-
-body.dark .navbar {
-    background-color: #343a40;
-}
-
-body.light .navbar {
-    background-color: #f8f9fa;
 }
 
 .navbar .nav_container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     min-width: 300px;
 }
@@ -36,16 +30,17 @@ body.light .navbar {
     align-items: center;
     font-size: 1.5rem;
     text-decoration: none;
+    color: rgba(0, 0, 0, 0.9);
     white-space: nowrap;
     margin-right: auto;
 }
 
-body.dark .navbar-brand {
-    color: rgba(249, 246, 246, 0.9);
-}
-
-body.light .navbar-brand {
-    color: #343a40;
+.navbar-toggler {
+    display: none;
+    padding: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    background-color: transparent;
 }
 
 .collapse {
@@ -63,11 +58,12 @@ body.light .navbar-brand {
 .navbar-nav {
     display: flex;
     flex-direction: row;
-    padding: 0;
+    padding-left: 0;
     list-style: none;
     justify-content: space-between;
     width: 100%;
 }
+
 
 /* Mục navbar */
 .nav-item {
@@ -89,18 +85,11 @@ body.light .navbar-brand {
     text-transform: uppercase;
     padding: 10px 20px;
     text-decoration: none;
+    color: #fff; /* Màu trắng cho chữ */
     font-size: 16px;
     font-weight: 600;
     transition: color 0.5s ease;
     z-index: 1;
-}
-
-body.dark .nav-link {
-    color: #fff; /* Màu trắng cho chữ */
-}
-
-body.light .nav-link {
-    color: #343a40;
 }
 
 .nav-link:hover {
@@ -110,15 +99,8 @@ body.light .nav-link {
 
 /* Phong cách cho mục hiện hành */
 .nav-item.active .nav-link {
-    background-color: #007bff;
-}
-
-body.dark .nav-item.active .nav-link {
     color: #fff;
-}
-
-body.light .nav-item.active .nav-link {
-    color: #343a40;
+    background-color: #007bff;
 }
 
 /* Tùy chỉnh cho menu khi user đăng nhập (role-specific) */
@@ -140,6 +122,7 @@ body.light .nav-item.active .nav-link {
     cursor: pointer;
 }
 
+
 /* Logo */
 .navbar-brand {
     display: flex;
@@ -151,7 +134,6 @@ body.light .nav-item.active .nav-link {
 }
 
 .navbar-brand:hover {
-    color: #ffc107;
     transform: scale(1.1); /* Tăng kích thước logo khi hover */
 }
 
@@ -162,14 +144,7 @@ body.light .nav-item.active .nav-link {
     font-weight: bold; /* Làm đậm chữ */
     letter-spacing: 2px; /* Thêm khoảng cách giữa các chữ */
     transition: color 0.3s ease;
-}
-
-body.dark .nav_web-title {
     color: #fff;
-}
-
-body.light .nav_web-title {
-    color: #343a40;
 }
 
 .nav_web-title:hover {
@@ -177,6 +152,17 @@ body.light .nav_web-title {
 }
 
 /* Đảm bảo navbar-toggler luôn ẩn trên màn hình lớn */
+.navbar-toggler {
+    display: none;
+    position: absolute;
+    left: 10px; /* Đặt icon bên trái */
+}
+.navbar-toggler .material-symbols-outlined {
+    color: #fff;
+    font-size: 35px;
+}
+
+
 .nav_btn {
     margin-left: auto;
     font-family: "Playwrite IN", serif;
@@ -185,6 +171,7 @@ body.light .nav_web-title {
     font-size: 16px;
     font-weight: 400;
     line-height: 45px;
+    color: #ffffff;
     text-decoration: none;
     width: 160px;
     text-align: center;
@@ -193,17 +180,9 @@ body.light .nav_web-title {
     backdrop-filter: blur(35px);
     overflow: hidden;
     border-radius: 25px;
-    border: 2px solid rgb(255, 255, 255, 0.3);
+    border: 2px solid rgb(255, 255, 255,0.3);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     background-color: rgba(255, 255, 255, 0.22);
-}
-
-body.dark .nav_btn {
-    color: #ffffff;
-}
-
-body.light .nav_btn {
-    color: #343a40;
 }
 
 /* SVG for Border Animation */
@@ -226,17 +205,10 @@ body.light .nav_btn {
 /* Hover Effect */
 .nav_btn:hover {
     background-color: transparent;
+    color: #e1332d; /* Change text color to red */
     font-weight: 900;
     letter-spacing: 1px;
     transition: all 0.6s ease;
-}
-
-body.dark .nav_btn:hover {
-    color: #e1332d; /* Change text color to red */
-}
-
-body.light .nav_btn:hover {
-    color: #007bff; /* Change text color to blue */
 }
 
 .nav_btn:hover rect {
@@ -245,6 +217,11 @@ body.light .nav_btn:hover {
     stroke-dashoffset: 83;
     transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
 }
+
+
+
+
+
 
 .bar {
     display: flex;
@@ -261,6 +238,7 @@ body.light .nav_btn:hover {
     text-transform: uppercase;
     padding: 10px 20px;
     text-decoration: none;
+    color: #fff; /* Màu trắng cho chữ */
     font-family: sans-serif;
     font-size: 11px;
     font-weight: 600;
@@ -298,15 +276,7 @@ body.light .nav_btn:hover {
 }
 
 .nav-link:hover {
-    background-color: #495057; /* Darker background on hover */
-}
-
-body.dark .nav-link:hover {
-    color: #ffc107;
-}
-
-body.light .nav-link:hover {
-    color: #007bff;
+    color: #000; /* Màu đen khi hover */
 }
 
 .nav-link:hover::before {
@@ -319,13 +289,40 @@ body.light .nav-link:hover {
     opacity: 1;
 }
 
-.toggle-btn {
-    display: none;
-    cursor: pointer;
-    font-size: 24px;
-}
+
+
+
+
+/* Responsive */
 @media (max-width: 992px) {
-    .navbar-nav {
-        display: none; /* Ẩn các mục ul li khi thu nhỏ màn hình */
+    .nav_container {
+        width: 90%;
+        
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        display: none !important;
+        position: fixed;
+        top: 0;
+        left: -250px; /* Ẩn sidebar bên trái */
+        width: 250px;
+        height: 100%;
+        background-color: #222222;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        padding-top: 60px;
+    }
+    .navbar-collapse.show {
+        left: 0; /* Hiển thị sidebar */
+    }
+    .navbar-toggler {
+        display: block;
+        position: absolute;
+        left: 10px;
+    }
+    .nav_btn {
+        display: none;
     }
 }
