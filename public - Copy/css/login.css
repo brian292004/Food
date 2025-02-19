@@ -1,0 +1,94 @@
+.btn {
+    border-radius: 1.35rem !important;
+    transition: all 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9; /* Màu đậm hơn khi di chuyển chuột vào */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng khi di chuyển chuột vào */
+}
+
+.btn-google {
+    background-color: #ea4335;
+    color: #fff;
+}
+
+.btn-google:hover {
+    background-color: #c23321; /* Màu đậm hơn khi di chuyển chuột vào */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng khi di chuyển chuột vào */
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.btn-facebook:hover {
+    background-color: #2d4373; /* Màu đậm hơn khi di chuyển chuột vào */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng khi di chuyển chuột vào */
+}
+
+.form-control {
+    border-radius: 1.35rem !important;
+}
+
+.semi-transparent-row {
+    background: rgba(255, 255, 255, 0.66); /* Màu nền mờ mờ */
+    backdrop-filter: blur(10px); /* Hiệu ứng làm mờ nền phía sau */
+    border-radius: 10px; /* Bo góc cho đẹp hơn */
+    padding: 20px; /* Thêm khoảng cách bên trong */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+.bg-login-image {
+    background: url('img/Auth/chef_login_img.png') no-repeat center center;
+    background-size: cover;
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.text-center h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4e73df;
+}
+
+.btn-user {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-radius: 10rem;
+}
+
+a.small {
+    color: #4e73df;
+}
+
+a.small:hover {
+    color: #224abe;
+}
+.invalid-feedback {
+    display: block;
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+.is-invalid {
+    border-color: red;
+}
