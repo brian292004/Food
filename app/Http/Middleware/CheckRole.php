@@ -19,10 +19,10 @@ class CheckRole
     {
         // dd('ok');
         if (!Auth::check()) {
-            return redirect()->route('login'); // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+            return redirect()->route('login'); 
         }
 
-        $user = Auth::user(); // Lấy thông tin người dùng một lần
+        $user = Auth::user(); 
 
         switch ($user->role) {
             case 'Admin':
@@ -32,9 +32,8 @@ class CheckRole
             case 'Shop':
                 return redirect()->route('dashboard.index');
             default:
-                // Xử lý trường hợp role không xác định
-                Auth::logout(); // Đăng xuất người dùng
-                return redirect()->route('login')->with('error', 'Vai trò không hợp lệ.'); // Chuyển hướng đến trang đăng nhập với thông báo lỗi
+                Auth::logout(); 
+                return redirect()->route('login')->with('error', 'Vai trò không hợp lệ.'); 
         }
     }
 }
