@@ -126,7 +126,6 @@ class AdminController extends Controller
                     'lock_start_time' => $request->input('lock_start_time'),
                     'is_locked' => true
                 ];
-                // Lưu trữ thông tin khóa tài khoản vào tệp JSON trong thư mục storage/public/status
                 $filename = storage_path('app/public/status/lockAccount.json');
                 $existingData = file_exists($filename) ? json_decode(file_get_contents($filename), true) : [];
                 $existingData[] = $status;

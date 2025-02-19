@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Middleware\CheckRole;
 
 
@@ -19,9 +20,6 @@ Route::post('admin/register', [AuthenticationController::class, 'registeruser'])
 
 Route::get('auth/google/redirect', [AuthenticationController::class, 'redirectToGoogle'])->name('auth.google.redirect');
 Route::get('auth/google/callback', [AuthenticationController::class, 'handleGoogleCallback']);
-
-// Route::get('auth/facebook/redirect', [AuthenticationController::class, 'redirectToFacebook'])->name('auth.facebook.redirect');
-// Route::get('auth/facebook/callback', [AuthenticationController::class, 'handleFacebookCallback']);
 
 
 
@@ -59,6 +57,17 @@ Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->gro
     Route::get('infoFood={id}', [FoodController::class, 'infoFood'])->name('infoFood');
     Route::get('showFood', [FoodController::class, 'food'])->name('showFood');
     Route::post('lockFood/{id}', [FoodController::class, 'lockFood'])->name('lockFood');
+
+    // Admin Promotion page routes
+    Route::get('addPromotion', [PromotionController::class, 'addPromotion'])->name('addPromotion');
+    Route::post('addPromotion', [PromotionController::class, 'storePromotion'])->name('storePromotion');
+    Route::get('editPromotion={id}', [PromotionController::class, 'editPromotion'])->name('editPromotion');
+    Route::post('updatePromotion={id}', [PromotionController::class, 'updatePromotion'])->name('updatePromotion');
+    Route::get('deletePromotion={id}', [PromotionController::class, 'deletePromotion'])->name('deletePromotion');
+    Route::get('searchPromotion', [PromotionController::class, 'searchPromotion'])->name('searchPromotion');
+    Route::get('infoPromotion={id}', [PromotionController::class, 'infoPromotion'])->name('infoPromotion');
+    Route::get('showPromotion', [PromotionController::class, 'showPromotion'])->name('showPromotion');
+    Route::post('lockPromotion/{id}', [PromotionController::class, 'lockPromotion'])->name('lockPromotion');
 });
 
 // Route::get('foodDashboard', [AdminController::class, 'food'])->name('user.dashboard');

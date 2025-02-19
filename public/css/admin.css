@@ -31,6 +31,12 @@
 .search-container{
     margin-left: -15px;
 }
+/* food-image */
+.food-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 /* show food action */
 .btn-action {
     transition: transform 0.2s;

@@ -21,7 +21,7 @@
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{{ asset('storage/food_images/' . $food->food_image) }}" alt="{{ $food->food_name }}" class="img-fluid rounded-start" width="100%">
+                        <img src="{{ asset('storage/food_images/' . $food->food_image) }}" alt="{{ $food->food_name }}" class="img-fluid rounded-start food-image">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
