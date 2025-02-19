@@ -117,4 +117,7 @@ class ShopController extends Controller
         }
         return redirect()->route('admin.showShop')->with('error', 'Không thể thay đổi trạng thái tài khoản');
     }
+
+
+    //////////////////////////////////////////////////////////////////UserPage//////////////////////////////////////////////////////////////////
 }

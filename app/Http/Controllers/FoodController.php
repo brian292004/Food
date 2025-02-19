@@ -6,24 +6,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Food;
 use App\Models\Shop;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class FoodController extends Controller
 {
-    public function food(){
+    public function food()
+    {
         $foods = Food::paginate(3);
-        return view('AdminPage.Food.showFood',compact(
+        return view('AdminPage.Food.showFood', compact(
             'foods'
         ));
     }
 
-    public function addFood(){
+    public function addFood()
+    {
         $Shop = Shop::all();
-        return view('AdminPage.Food.addFood',compact(
+        return view('AdminPage.Food.addFood', compact(
             'Shop'
         ));
     }
 
-    public function storeFood(Request $request){
+    public function storeFood(Request $request)
+    {
         $request->validate([
             'food_name' => 'required',
             'food_price' => 'required',
@@ -39,7 +44,7 @@ class FoodController extends Controller
         $food->shop_id = $request->shop_id;
         if ($request->hasFile('food_image')) {
             $food_image = $request->file('food_image');
-            $food_imageName = time().'.'.$food_image->getClientOriginalExtension();
+            $food_imageName = time() . '.' . $food_image->getClientOriginalExtension();
             $path = $food_image->storeAs('food_images', $food_imageName, 'public');
             $food->food_image = $food_imageName;
         }
@@ -49,16 +54,18 @@ class FoodController extends Controller
         return redirect()->route('admin.showFood');
     }
 
-    public function editFood($id){
+    public function editFood($id)
+    {
         $food = Food::find($id);
         $Shop = Shop::all();
-        return view('AdminPage.Food.editFood',compact(
+        return view('AdminPage.Food.editFood', compact(
             'food',
             'Shop'
         ));
     }
 
-    public function updateFood(Request $request, $id){
+    public function updateFood(Request $request, $id)
+    {
         $request->validate([
             'food_name' => 'required',
             'food_price' => 'required',
@@ -71,7 +78,7 @@ class FoodController extends Controller
         $food->food_description = $request->food_description;
         if ($request->hasFile('food_image')) {
             $food_image = $request->file('food_image');
-            $food_imageName = time().'.'.$food_image->getClientOriginalExtension();
+            $food_imageName = time() . '.' . $food_image->getClientOriginalExtension();
             $path = $food_image->storeAs('food_images', $food_imageName, 'public');
             $food->food_image = $food_imageName;
         }
@@ -80,40 +87,65 @@ class FoodController extends Controller
         return redirect()->route('admin.showFood');
     }
 
-    public function deleteFood($id){
+    public function deleteFood($id)
+    {
         $food = Food::find($id);
         $food->delete();
         return redirect()->route('admin.showFood');
     }
 
-    public function searchFood(Request $request){
+    public function searchFood(Request $request)
+    {
         $keyword = $request->keyword;
-        $foods = Food::where('shop_name','like', "%$keyword%")
-                ->orWhere('food_name', 'like', "%$keyword%")
-                ->orWhere('food_price', 'like', "%$keyword%")
-                ->orWhere('food_rating', 'like', "%$keyword%")
-                ->paginate(5);
-        return view('AdminPage.Food.showFood',compact(
+        $foods = Food::where('shop_name', 'like', "%$keyword%")
+            ->orWhere('food_name', 'like', "%$keyword%")
+            ->orWhere('food_price', 'like', "%$keyword%")
+            ->orWhere('food_rating', 'like', "%$keyword%")
+            ->paginate(5);
+        return view('AdminPage.Food.showFood', compact(
             'foods'
         ));
     }
 
-    public function infoFood($id){
+    public function infoFood($id)
+    {
         $food = Food::find($id);
-        return view('AdminPage.Food.infoFood',compact(
+        return view('AdminPage.Food.infoFood', compact(
             'food'
         ));
     }
 
-    public function lockFood($id){
+    public function lockFood($id)
+    {
         $food = Food::find($id);
-        if($food->food_status == 1){
+        if ($food->food_status == 1) {
             $food->food_status = 0;
-        }else{
+        } else {
             $food->food_status = 1;
         }
         $food->save();
         return redirect()->route('admin.showFood');
     }
-    
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////UserPage//////////////////////////////////////////////////////////////////
+
+    public function index()
+    {
+        $foods = Cache::remember('foods_list', 600, function () {
+            return Food::select('id', 'food_name', 'food_image', 'food_price')
+                ->orderBy('created_at', 'desc') // Sắp xếp theo thời gian mới nhất
+                ->limit(20) // Giới hạn số lượng lấy ra (có thể điều chỉnh)
+                ->get();
+        });
+        Log::info($foods);
+        return view('UserPage.Food.food-list', compact('foods'));
+    }
+
 }

@@ -13,5 +13,13 @@ class Shop extends Model
         'shop_email',
         'shop_logo',
         'shop_status',
+        'shop_support_email',
+        'shop_support_messenger',
+        'shop_description',
+        'shop_rating',
     ];
+    public function products()
+    {
+        return $this->hasMany(Food::class);
+    }
 }

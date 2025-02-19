@@ -7,11 +7,11 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Middleware\CheckRole;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductCatalogController;
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('login', [AuthenticationController::class, 'login'])->name('login');
 Route::post('login', [AuthenticationController::class, 'checklogin']);
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');
@@ -22,7 +22,14 @@ Route::get('auth/google/redirect', [AuthenticationController::class, 'redirectTo
 Route::get('auth/google/callback', [AuthenticationController::class, 'handleGoogleCallback']);
 
 
+///////////////////////////////////////////////////User//////////////////////////////////////////////////////////
+Route::get('product-catalog', [ProductCatalogController::class, 'index'])->name('product-catalog');
+Route::get('food-list', [FoodController::class, 'index'])->name('food-list');
 
+
+
+
+/////////////////////////////////////////////Admin///////////////////////////////////////////////
 Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->group(function () {
     // Admin page routes
     Route::get('dashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');

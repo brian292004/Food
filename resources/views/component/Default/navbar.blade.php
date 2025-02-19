@@ -25,7 +25,7 @@
                     @if(auth()->user()->role == 'Admin')
                         <!-- Navbar admin -->
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        {{-- <li class="nav-item"><a class="nav-link" href="{{ route('admin.settings') }}">Settings</a></li> --}}
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.settings') }}">Settings</a></li>
                     @elseif(auth()->user()->role == 'User')
                         <!-- Navbar user -->
                         <li class="nav-item"><a class="nav-link" href="{{ route('user.dashboard') }}">Dashboard</a></li>
@@ -40,7 +40,7 @@
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="get" style="display: none;">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </li>
