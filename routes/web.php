@@ -25,6 +25,7 @@ Route::get('auth/google/callback', [AuthenticationController::class, 'handleGoog
 ///////////////////////////////////////////////////User//////////////////////////////////////////////////////////
 Route::get('product-catalog', [ProductCatalogController::class, 'index'])->name('product-catalog');
 Route::get('food-list', [FoodController::class, 'index'])->name('food-list');
+Route::get('/food/{id}', [FoodController::class, 'foodDetail'])->name('food.detail');
 
 
 
