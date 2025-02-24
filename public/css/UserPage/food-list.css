@@ -36,47 +36,310 @@
     color: #c53030;
 }
 
+/*Food List*/
+/* Bố cục danh sách món ăn */
 .food-list-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Điều chỉnh khoảng cách giữa các card */
+    gap: 20px; /* Khoảng cách giữa các card */
     margin-top: 50px;
+    justify-content: center; /* Căn giữa danh sách */
 }
 
+/* Bố cục của từng card */
 .food-list-card {
-    background-color: #2d3748;
-    padding: 50px 20px 20px;
-    border-radius: 10px;
-    text-align: center;
+    border-radius: 15px;
+    text-align: left; /* Align text to the left */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Align items to the left */
     width: 200px;
-    height: 240px;
+    height: 220px;
     position: relative;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
+/* Hiệu ứng hover */
+.food-list-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Chế độ tối/sáng */
+body.dark .food-list-card {
+    background-color: #2d3748;
+}
+
+body.light .food-list-card {
+    background-color: #ffffff;
+}
+
+/* Hình ảnh */
 .food-list-card img {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
     top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease-in-out;
 }
 
-.food-list-card h3 {
-    margin-top: 80px;
-    font-size: 18px;
+.food-list-card:hover img {
+    transform: translateX(-50%) scale(1.1);
+}
+
+/* Bố cục thông tin món ăn */
+.food-list-info {
+    display: flex;
+    flex-direction: row; /* Sắp xếp từ trái qua phải */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+/* Tên món ăn - Ẩn bớt nếu quá dài */
+.food-list-name {
+    padding: 0 10px;
+    max-width: 100px; /* Giới hạn chiều rộng */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 135px;
+    margin-bottom: 5px;
+}
+
+body.dark .food-list-card .food-list-name {
     color: #ffffff;
 }
 
-.food-list-card p {
-    margin: 5px 0;
-    color: #a0aec0;
-    font-size: 16px;
+body.light .food-list-card .food-list-name {
+    color: #000000;
 }
 
-.food-list-text-gray {
-    color: #a0aec0;
+/* Giá tiền */
+.food-list-price-container {
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the left */
+    gap: 8px;
 }
+
+/* Giá cũ */
+.food-list-old-price {
+    color: gray;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+
+/* Giá mới */
+.food-list-new-price {
+    color: #e63946;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/* Giá không giảm */
+.food-list-regular-price {
+    color: #e63946;
+    font-size: 21px;
+    font-weight: bold;
+}
+.currency{
+    font-size: 16px;
+    margin-left: 2px;
+}
+
+/* Đánh giá & số lượng bán */
+.food-list-rating-sold {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the left */
+    gap: 8px; /* Điều chỉnh khoảng cách hợp lý */
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* Đánh giá */
+.food-list-rating {
+    color: #f39c12;
+}
+
+/* Số lượng đã bán */
+.food-list-sold {
+    color: #777;
+}
+
+/* Màu chữ ghi chú */
+.food-list-text-gray {
+    margin: 10px auto;
+    color: #a0aec0;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/*end Food List*/
+
+/*flash sale*/
+.flash-sale-food-container {
+    border: 1px solid #bfdbfe;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+body.dark .flash-sale-food-container {
+    background: #2d3748;
+}
+
+body.light .flash-sale-food-container {
+    background: #ffffff;
+}
+
+.flash-sale-food-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.flash-sale-food-title {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+body.dark .flash-sale-food-title {
+    color: #ffffff;
+}
+
+body.light .flash-sale-food-title {
+    color: #000000;
+}
+
+.flash-sale-food-title i {
+    color: red;
+}
+
+.flash-sale-food-discount {
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.flash-sale-food-timer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.flash-sale-food-timer div {
+    background-color: black;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.flash-sale-food-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.flash-sale-food-product {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 135px;
+}
+
+body.dark .flash-sale-food-product {
+    background: #2d3748;
+}
+
+body.light .flash-sale-food-product {
+    background: #ffffff;
+}
+
+.flash-sale-food-product img {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.flash-sale-food-price-info {
+    padding-left: 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.flash-sale-food-price-info .price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.flash-sale-food-new-price {
+    font-size: 21px;
+    color: red;
+}
+
+.flash-sale-food-old-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: rgb(183, 181, 181);
+}
+
+.flash-sale-food-discount-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.flash-sale-food-product .flash-sale-food-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: 3px;
+}
+
+body.dark .flash-sale-food-product .flash-sale-food-name {
+    color: #ffffff;
+}
+
+body.light .flash-sale-food-product .flash-sale-food-name {
+    color: #000000;
+}
+/*end flash sale*/

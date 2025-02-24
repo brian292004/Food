@@ -8,7 +8,7 @@ use App\Models\Food;
 use App\Models\Shop;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
 class FoodController extends Controller
 {
     public function food()
@@ -135,17 +135,71 @@ class FoodController extends Controller
 
 
     //////////////////////////////////////////////////////////////////UserPage//////////////////////////////////////////////////////////////////
-
+   //////////////////////////////////////////////////////////////////Food List//////////////////////////////////////////////////////////////////
     public function index()
     {
         $foods = Cache::remember('foods_list', 600, function () {
-            return Food::select('id', 'food_name', 'food_image', 'food_price')
-                ->orderBy('created_at', 'desc') // Sắp xếp theo thời gian mới nhất
-                ->limit(20) // Giới hạn số lượng lấy ra (có thể điều chỉnh)
+            return DB::table('food AS f')
+                ->selectRaw("
+                f.id AS food_id, 
+                f.food_name, 
+                f.food_image,
+                f.food_price AS old_price, 
+                COALESCE(MAX(sal.discount_percent), 0) AS discount_percent,  
+                COALESCE(MAX(sal.discount_amount), 0) AS discount_amount,
+                f.food_price - COALESCE(MAX(sal.discount_amount), f.food_price * (COALESCE(MAX(sal.discount_percent), 0) / 100), 0) AS new_price,
+                f.shop_id, 
+                s.shop_name,
+                f.food_sold_count,
+                f.food_average_rating
+            ")
+                ->leftJoin('sale_foods AS sf', 'f.id', '=', 'sf.food_id')
+                ->leftJoin('sales AS sal_f', function ($join) {
+                    $join->on('sf.sale_id', '=', 'sal_f.id')
+                        ->where('sal_f.is_active', '=', 1)
+                        ->whereRaw('NOW() BETWEEN sal_f.start_time AND sal_f.end_time');
+                })
+                ->leftJoin('sale_shops AS ss', 'f.shop_id', '=', 'ss.shop_id')
+                ->leftJoin('sales AS sal_s', function ($join) {
+                    $join->on('ss.sale_id', '=', 'sal_s.id')
+                        ->where('sal_s.is_active', '=', 1)
+                        ->whereRaw('NOW() BETWEEN sal_s.start_time AND sal_s.end_time');
+                })
+                ->leftJoin('shops AS s', 'f.shop_id', '=', 's.id')
+                ->leftJoin(DB::raw("
+                (SELECT 
+                    id, 
+                    MAX(discount_percent) AS discount_percent,
+                    MAX(discount_amount) AS discount_amount
+                FROM sales
+                WHERE is_active = 1 
+                AND NOW() BETWEEN start_time AND end_time
+                GROUP BY id) AS sal"), function ($join) {
+                    $join->whereRaw('sal.id IN (sf.sale_id, ss.sale_id)');
+                })
+                ->groupBy('f.id', 'f.food_name', 'f.food_image', 'f.food_price', 'f.shop_id', 's.shop_name', 'f.food_sold_count', 'f.food_average_rating')
+                ->orderByDesc(DB::raw("COALESCE(MAX(sal.discount_amount), f.food_price * (COALESCE(MAX(sal.discount_percent), 0) / 100), 0)")) // Sắp xếp theo giá trị giảm nhiều nhất
+                ->limit(20)
                 ->get();
         });
+
         Log::info($foods);
+
         return view('UserPage.Food.food-list', compact('foods'));
     }
 
+    //////////////////////////////////////////////////////////////////End Food List//////////////////////////////////////////////////////////////////
+    
+    //////////////////////////////////////////////////////////////////Food Detail//////////////////////////////////////////////////////////////////
+    public function foodDetail($id){
+        $food = Food::find($id);
+        // Kiểm tra nếu món ăn không tồn tại
+        if (!$food) {
+            return abort(404, 'Món ăn không tồn tại');
+        }
+        $foodImages = json_decode($food->food_image, true);
+        // Trả về view với dữ liệu
+        return view('UserPage.Food.food-detail', compact('food','foodImages'));
+    }
+    //////////////////////////////////////////////////////////////////End Food Detail//////////////////////////////////////////////////////////////////
 }

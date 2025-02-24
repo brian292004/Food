@@ -5,3 +5,4 @@
 <script src="{{ asset('js/home.js') }}"></script>
 <script src="{{ asset('js/Layout/sidebar.js') }}"></script>
 <script src="{{ asset('js/translations.js') }}"></script>
+<script src="{{ asset('js/UserPage/food-list.js') }}"></script>
