@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Food\FoodImage;
 class Food extends Model
 {
     protected $fillable = [
@@ -21,5 +21,9 @@ class Food extends Model
     public function shop()
     {
         return $this->belongsTo(Shop::class);
+    }
+    public function foodImages()
+    {
+        return $this->hasMany(FoodImage::class, 'food_id');
     }
 }
