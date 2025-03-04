@@ -3,7 +3,7 @@
 <div class="container">
     <h1 class="my-4">Quản lý Khuyến mãi</h1>
 
-    <a href="{{ route('admin.addPromotion') }}" class="btn btn-primary mb-3">Thêm Khuyến mãi mới</a>
+    <a href="{{ route('admin.addSale') }}" class="btn btn-primary mb-3">Thêm Khuyến mãi mới</a>
 
     <table class="table table-bordered">
         <thead>
@@ -17,16 +17,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($promotions as $promotion)
+            @foreach($sales as $sale)
             <tr>
-                <td>{{ $promotion->pm_name }}</td>
-                <td>{{ $promotion->pm_description }}</td>
-                <td>{{ $promotion->pm_discount }} %</td>
-                <td>{{ $promotion->pm_start_date }}</td>
-                <td>{{ $promotion->pm_end_date }}</td>
+                <td>{{ $sale->sale_name }}</td>
+                <td>{{ $sale->sale_description }}</td>
+                <td>{{ number_format($sale->discount_percent,0)}} %</td>
+                <td>{{ $sale->start_time }}</td>
+                <td>{{ $sale->end_time }}</td>
                 <td>
-                    <a href="{{ route('admin.editPromotion', $promotion->id) }}" class="btn btn-warning btn-sm">Sửa</a>
-                    <form action="{{ route('admin.deletePromotion', $promotion->id) }}" method="POST" style="display:inline-block;">
+                    <a href="{{ route('admin.editSale', $sale->id) }}" class="btn btn-warning btn-sm">Sửa</a>
+                    <form action="{{ route('admin.deleteSale', $sale->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
                     </form>

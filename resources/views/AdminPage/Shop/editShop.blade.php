@@ -45,6 +45,15 @@
                             <input type="text" class="form-control" id="phone" name="shop_phone" required value="{{ $Shop->shop_phone }}">
                             <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
                         </div>
+                        <div class="form-group mb-4">
+                            <label for="sale" class="form-label">Khuyến mãi</label>
+                            <select class="form-control" id="sale" name="sale_id">
+                                <option value="">Không có khuyến mãi</option>
+                                @foreach($sales as $sale)
+                                    <option value="{{ $sale->id }}" {{ $sale->id == $Shop->sale_id ? 'selected' : '' }}>{{ $sale->sale_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                         <button type="reset" class="btn btn-danger">Reset</button>
                         <button type="button" class="btn btn-warning" onclick="window.history.back()">Quay lại</button>

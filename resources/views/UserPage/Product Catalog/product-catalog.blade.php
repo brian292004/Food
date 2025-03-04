@@ -27,27 +27,34 @@
     <!-- Product Section -->
     <h2 style="margin-top: 20px;">TRÁI CÂY NHẬP KHẨU</h2>
     <div class="product-catalog-grid product-catalog-grid-4">
-        <div class="product-catalog-product">
-            <img src="https://storage.googleapis.com/a1aa/image/jEt4FfQ1mLDqfmRqZ5k_zMqrWo20ZBxM_GgR3Qs_AOM.jpg" alt="Product 1">
-            <p>Thùng 48 Hộp Sữa Active Go Ít Đường</p>
-            <p class="product-catalog-price">306.000đ</p>
-            <p>Tặng 2 túi đựng bút</p>
-        </div>
-        <div class="product-catalog-product">
-            <img src="https://storage.googleapis.com/a1aa/image/KSXOjg6o-Vm8od7pKQIkhcH8q1HqHveFmgUd1F4kQx8.jpg" alt="Product 2">
-            <p>Coco Xim</p>
-            <p class="product-catalog-price">10% OFF</p>
-        </div>
-        <div class="product-catalog-product">
-            <img src="https://storage.googleapis.com/a1aa/image/Y7XYYA3mflf7Rxe6jtWCJlwqvacdumec8xpDByAY-Tw.jpg" alt="Product 3">
-            <p>Fanta</p>
-            <p class="product-catalog-price">15% OFF</p>
-        </div>
-        <div class="product-catalog-product">
-            <img src="https://storage.googleapis.com/a1aa/image/aet9J2edaMQrLMFLIADdb63OL718SwJlxO_JamNw834.jpg" alt="Product 4">
-            <p>Tea</p>
-            <p class="product-catalog-price">5% OFF</p>
-        </div>
+        @foreach ($foods as $food)
+            <div class="product-catalog-product" data-href="{{ route('food.detail', ['id' => $food->id]) }}">
+                <img src="{{ asset('storage/food_images/' . $food->food_image) }}" alt="{{ $food->food_name }}" class="img-fluid">
+                <strong class="product-catalog-address">{{$food->food_name}}</strong>
+                <p class="product-catalog-price">{{number_format($food->food_price)}} VNĐ</p>
+                <p class="product-catalog-address">Địa chỉ: {{$food->shop->shop_address}}</p>
+                <hr>
+                @if ($food->saleFood && $food->saleFood->sale)
+                    <p class="product-catalog-price">Giảm: {{ number_format( $food->saleFood->sale->discount_percent,0) }}%</p>
+                @else
+                    <p class="product-catalog-price">Không có khuyến mãi</p>
+                @endif
+            </div>
+        @endforeach
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var products = document.querySelectorAll('.product-catalog-product');
+        products.forEach(function(product) {
+            product.addEventListener('click', function() {
+                var href = this.getAttribute('data-href');
+                if (href) {
+                    window.location.href = href;
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FoodController;
-use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\SaleController;
 use App\Http\Middleware\CheckRole;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductCatalogController;
@@ -66,16 +66,16 @@ Route::prefix('/')->name('admin.')->middleware(['auth', 'checkRole:Admin'])->gro
     Route::get('showFood', [FoodController::class, 'food'])->name('showFood');
     Route::post('lockFood/{id}', [FoodController::class, 'lockFood'])->name('lockFood');
 
-    // Admin Promotion page routes
-    Route::get('addPromotion', [PromotionController::class, 'addPromotion'])->name('addPromotion');
-    Route::post('addPromotion', [PromotionController::class, 'storePromotion'])->name('storePromotion');
-    Route::get('editPromotion={id}', [PromotionController::class, 'editPromotion'])->name('editPromotion');
-    Route::post('updatePromotion={id}', [PromotionController::class, 'updatePromotion'])->name('updatePromotion');
-    Route::get('deletePromotion={id}', [PromotionController::class, 'deletePromotion'])->name('deletePromotion');
-    Route::get('searchPromotion', [PromotionController::class, 'searchPromotion'])->name('searchPromotion');
-    Route::get('infoPromotion={id}', [PromotionController::class, 'infoPromotion'])->name('infoPromotion');
-    Route::get('showPromotion', [PromotionController::class, 'showPromotion'])->name('showPromotion');
-    Route::post('lockPromotion/{id}', [PromotionController::class, 'lockPromotion'])->name('lockPromotion');
+    // Admin Sale page routes
+    Route::get('addSale', [SaleController::class, 'addSale'])->name('addSale');
+    Route::post('addSale', [SaleController::class, 'storeSale'])->name('storeSale');
+    Route::get('editSale={id}', [SaleController::class, 'editSale'])->name('editSale');
+    Route::post('updateSale={id}', [SaleController::class, 'updateSale'])->name('updateSale');
+    Route::get('deleteSale={id}', [SaleController::class, 'deleteSale'])->name('deleteSale');
+    Route::get('searchSale', [SaleController::class, 'searchSale'])->name('searchSale');
+    Route::get('infoSale={id}', [SaleController::class, 'infoSale'])->name('infoSale');
+    Route::get('showSale', [SaleController::class, 'showSale'])->name('showSale');
+    Route::post('lockSale/{id}', [SaleController::class, 'lockSale'])->name('lockSale');
 });
 
 // Route::get('foodDashboard', [AdminController::class, 'food'])->name('user.dashboard');

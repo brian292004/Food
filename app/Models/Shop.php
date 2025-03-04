@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Food;
+use App\Models\Sale\SaleShop;
 
 class Shop extends Model
 {
@@ -21,5 +23,10 @@ class Shop extends Model
     public function products()
     {
         return $this->hasMany(Food::class);
+    }
+
+    public function saleShop()
+    {
+        return $this->hasOne(SaleShop::class, 'shop_id');
     }
 }

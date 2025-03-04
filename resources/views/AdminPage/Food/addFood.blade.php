@@ -25,7 +25,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="rating" class="form-label">Đánh giá</label>
-                            <input type="number" class="form-control" id="food_rating" name="food_rating" step="0.1" max="5" required>
+                            <input type="number" class="form-control" id="food_average_rating" name="food_average_rating" step="0.1" max="5" required>
                         </div>
                         <div class="mb-3">
                             <label for="shop_id" class="form-label">Cửa hàng</label>

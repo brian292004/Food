@@ -56,11 +56,16 @@
     text-decoration: none;
 }
 .product-catalog-product {
-    background: white;
-    padding: 16px;
+    transition: transform 0.2s;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 16px;
     text-align: center;
+    background: white;
+}
+.product-catalog-product:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 .product-catalog-product img {
     width: 100%;
@@ -74,6 +79,12 @@
     color: #374151;
 }
 .product-catalog-price {
-    color: #dc2626;
+    color: #dc2626 !important;
     font-weight: bold;
+}
+.product-catalog-address {
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    overflow: hidden; /* Ẩn nội dung vượt quá chiều rộng */
+    text-overflow: ellipsis; /* Hiển thị dấu chấm lửng */
+    width: 250px; /* Hoặc chiều rộng bạn muốn */
 }

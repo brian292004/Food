@@ -16,7 +16,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('/') }}">About</a></li>
                 @endguest
 
-                @auth
+                {{-- @auth
                     @if(auth()->user()->role == 'Admin')
                         <!-- Navbar admin -->
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
@@ -39,7 +39,7 @@
                             @csrf
                         </form>
                     </li>
-                @endauth
+                @endauth --}}
             </ul>
             @guest
                 <a href="#" class="nav_btn nav_btn-1 ml-auto">

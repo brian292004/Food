@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Food;
 use App\Models\Shop;
+use App\Models\Sale\ShopFood;
+use App\Models\Sale\Sale;
+use App\Models\Sale\SaleFood;
+use App\Models\Sale\SaleShop;
 
 class ShopController extends Controller
 {
     public function showShop(){
-        $Shop = Shop::paginate(5);
+        $Shop = Shop::with('saleShop.sale')->paginate(5);
         return view('AdminPage.Shop.index',compact(
             'Shop'
         ));
@@ -37,8 +42,12 @@ class ShopController extends Controller
 
     public function editShop($id){
         $Shop = Shop::find($id);
+        $sales = Sale::all();
+        $food = Food::all();
         return view('AdminPage.Shop.editShop',compact(
-            'Shop'
+            'Shop',
+            'sales',
+            'food'
         ));
     }
     public function updateShop(Request $request,$id){
@@ -63,6 +72,16 @@ class ShopController extends Controller
             $Shop->update(['shop_logo' => $shop_logoName]);
         }
         $Shop->save();
+
+        if ($request->sale_id) {
+            SaleShop::create([
+                'shop_id' => $Shop->id,
+                'sale_id' => $request->sale_id
+            ]);
+        } 
+        else{
+            SaleShop::where('shop_id', $Shop->id)->delete();
+        }
 
         return redirect()->route('admin.showShop');
     }
@@ -90,6 +109,7 @@ class ShopController extends Controller
     }
 
     public function lockShop(Request $request, $id){
+        // dd($request->all());
         $Shop = Shop::find($id);
         if ($Shop) {
             if ($Shop->shop_status == 'Unlock') {

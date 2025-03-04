@@ -43,20 +43,20 @@
         </div>
     </li>
 
-    <li class="nav-item {{ request()->routeIs('admin.showFood', 'admin.showPromotion') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->routeIs('admin.showFood', 'admin.showSale') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseShop"
-            aria-expanded="{{ request()->routeIs('admin.showFood', 'admin.showPromotion') ? 'true' : 'false' }}" aria-controls="collapseShop">
+            aria-expanded="{{ request()->routeIs('admin.showFood', 'admin.showSale') ? 'true' : 'false' }}" aria-controls="collapseShop">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Quản lý cửa hàng</span>
         </a>
-        <div id="collapseShop" class="collapse {{ request()->routeIs('admin.showFood', 'admin.showPromotion') ? 'show' : '' }}" 
+        <div id="collapseShop" class="collapse {{ request()->routeIs('admin.showFood', 'admin.showSale') ? 'show' : '' }}" 
             aria-labelledby="headingShop" data-bs-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tiện ích của cửa hàng:</h6>
                 <a class="collapse-item {{ request()->routeIs('admin.showFood') ? 'active' : '' }}" 
                     href="{{route('admin.showFood')}}">Quản lý món ăn</a>
                 <a class="collapse-item" 
-                href="{{route('admin.showPromotion')}}">Quản lý khuyến mãi</a>
+                href="{{route('admin.showSale')}}">Quản lý khuyến mãi</a>
                 <a class="collapse-item" 
                 href="utilities-animation.html">Quản lý giao hàng</a>
                 <a class="collapse-item" 

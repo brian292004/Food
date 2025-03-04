@@ -29,7 +29,14 @@
                             <p class="card-text"><strong>Tên món:</strong> {{ $food->food_name }}</p>
                             <p class="card-text"><strong>Giá:</strong> {{ number_format($food->food_price, 0, ',', '.') }} VND</p>
                             <p class="card-text"><strong>Mô tả:</strong> {{ $food->food_description }}</p>
-                            <p class="card-text"><strong>Đánh giá:</strong> {{ $food->food_rating }} / 5</p>
+                            <p class="card-text"><strong>Đánh giá:</strong> {{ $food->food_average_rating }} / 5</p>
+                            <p class="card-text"><strong>Khuyến mãi:</strong> 
+                                @if($food->saleFood && $food->saleFood->sale)
+                                    {{ number_format($food->saleFood->sale->discount_percent,0)}} % từ {{ $food->saleFood->sale->start_time }} đến {{ $food->saleFood->sale->end_time }}
+                                @else
+                                    Không có khuyến mãi
+                                @endif
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-2 d-flex align-items-center">

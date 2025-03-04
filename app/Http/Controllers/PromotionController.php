@@ -3,98 +3,98 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Promotion;
+use App\Models\sale;
 
-class PromotionController extends Controller
+class saleController extends Controller
 {
-    public function addPromotion()
+    public function addSale()
     {
-        return view('AdminPage.Promotion.addPromotion');
+        return view('AdminPage.Sale.addSale');
     }
 
-    public function storePromotion(Request $request)
-    {
-        $request->validate([
-            'pm_name' => 'required',
-            'pm_description' => 'required',
-            'pm_start_date' => 'required',
-            'pm_end_date' => 'required',
-            'pm_discount' => 'required',
-        ]);
-
-        $promotion = new Promotion();
-        $promotion->pm_name = $request->pm_name;
-        $promotion->pm_description = $request->pm_description;
-        $promotion->pm_start_date = $request->pm_start_date;
-        $promotion->pm_end_date = $request->pm_end_date;
-        $promotion->pm_discount = $request->pm_discount;
-        $promotion->save();
-
-        return redirect()->route('admin.showPromotion');
-    }
-
-    public function editPromotion($id)
-    {
-        $promotion = Promotion::find($id);
-        return view('AdminPage.Promotion.editPromotion', compact('promotion'));
-    }
-
-    public function updatePromotion(Request $request, $id)
+    public function storeSale(Request $request)
     {
         $request->validate([
-            'pm_name' => 'required|min:3|max:50',
-            'pm_description' => 'required',
-            'pm_start_date' => 'required',
-            'pm_end_date' => 'required',
-            'pm_discount' => 'required|min:1|max:100',
+            'sale_name' => 'required',
+            'sale_description' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'discount_percent' => 'required',
         ]);
 
-        $promotion = Promotion::find($id);
-        $promotion->pm_name = $request->pm_name;
-        $promotion->pm_description = $request->pm_description;
-        $promotion->pm_start_date = $request->pm_start_date;
-        $promotion->pm_end_date = $request->pm_end_date;
-        $promotion->pm_discount = $request->pm_discount;
-        $promotion->save();
+        $sale = new sale();
+        $sale->sale_name = $request->sale_name;
+        $sale->sale_description = $request->sale_description;
+        $sale->start_time = $request->start_time;
+        $sale->end_time = $request->end_time;
+        $sale->discount_percent = $request->discount_percent;
+        $sale->save();
 
-        return redirect()->route('admin.showPromotion');
+        return redirect()->route('admin.showSale');
     }
 
-    public function deletePromotion($id)
+    public function editSale($id)
     {
-        $promotion = Promotion::find($id);
-        $promotion->delete();
-
-        return redirect()->route('admin.showPromotion');
+        $sale = sale::find($id);
+        return view('AdminPage.Sale.editSale', compact('sale'));
     }
 
-    public function searchPromotion(Request $request)
+    public function updatesale(Request $request, $id)
+    {
+        $request->validate([
+            'sale_name' => 'required|min:3|max:50',
+            'sale_description' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'discount_percent' => 'required|min:1|max:100',
+        ]);
+
+        $sale = sale::find($id);
+        $sale->sale_name = $request->sale_name;
+        $sale->sale_description = $request->sale_description;
+        $sale->start_time = $request->start_time;
+        $sale->end_time = $request->end_time;
+        $sale->discount_percent = $request->discount_percent;
+        $sale->save();
+
+        return redirect()->route('admin.showSale');
+    }
+
+    public function deletesale($id)
+    {
+        $Sale = Sale::find($id);
+        $sale->delete();
+
+        return redirect()->route('admin.showSale');
+    }
+
+    public function searchsale(Request $request)
     {
         $keyword = $request->keyword;
-        $promotions = Promotion::where('pm_name', 'like', "%$keyword%")
-            ->orWhere('pm_discount', 'like', "%$keyword%")
+        $Sale = Sale::where('sale_name', 'like', "%$keyword%")
+            ->orWhere('discount_percent', 'like', "%$keyword%")
             ->get();
-        return view('AdminPage.Promotion.showPromotion', compact('promotions'));
+        return view('AdminPage.Sale.showSale', compact('Sale'));
     }
 
-    public function infoPromotion($id)
+    public function infosale($id)
     {
-        $promotion = Promotion::find($id);
-        return view('AdminPage.Promotion.infoPromotion', compact('promotion'));
+        $sale = Sale::find($id);
+        return view('AdminPage.Sale.infoSale', compact('sale'));
     }
 
-    public function showPromotion()
+    public function showSale()
     {
-        $promotions = Promotion::all();
-        return view('AdminPage.Promotion.showPromotion', compact('promotions'));
+        $Sale = Sale::all();
+        return view('AdminPage.Sale.showSale', compact('Sale'));
     }
 
-    public function lockPromotion($id)
+    public function locksale($id)
     {
-        $promotion = Promotion::find($id);
-        $promotion->pm_status = 0;
-        $promotion->save();
+        $Sale = Sale::find($id);
+        $sale->pm_status = 0;
+        $sale->save();
 
-        return redirect()->route('admin.showPromotion');
+        return redirect()->route('admin.showSale');
     }
 }

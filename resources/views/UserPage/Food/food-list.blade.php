@@ -100,8 +100,8 @@
                         <!-- Phần 3: Giá tiền -->
                         <div class="food-list-price-container">
                             @if ($food->discount_percent > 0 || $food->discount_amount > 0)
-                                <span class="food-list-new-price">{{ number_format($food->new_price, 2) }}<span class="currency">Vnđ</span></span>
-                                <span class="food-list-old-price">{{ number_format($food->old_price, 2) }}<span class="currency">Vnđ</span></span>
+                                <span class="food-list-new-price">{{ number_format($food->new_price, 0) }}<span class="currency">Vnđ</span></span>
+                                <span class="food-list-old-price">{{ number_format($food->old_price, 0) }}<span class="currency">Vnđ</span></span>
                             @else
                                 <span class="food-list-regular-price">${{ number_format($food->old_price, 2) }}</span>
                             @endif
