@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Sale\SaleFood; // Import đúng class SaleFood
-use App\Models\Food\FoodImage; // Import đúng class FoodImage
+use App\Models\Sale\SaleFood; 
+use App\Models\Food\FoodImage; 
+
 
 class Food extends Model
 {
@@ -30,6 +31,7 @@ class Food extends Model
     {
         return $this->hasOne(SaleFood::class, 'food_id');
     }
+
 
     public function foodImages()
     {
